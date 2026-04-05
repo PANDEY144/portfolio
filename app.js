@@ -1,18 +1,28 @@
 (function () {
   'use strict';
 
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -2.5rem 0px' }
-  );
-  reveals.forEach((el) => observer.observe(el));
+  requestAnimationFrame(() => {
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    reveals.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('visible');
+      } else {
+        observer.observe(el);
+      }
+    });
+  });
 
   document.querySelectorAll('.strength-item').forEach((el, i) => {
     el.style.transitionDelay = `${i * 0.08}s`;
@@ -31,30 +41,20 @@
     navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   }
 
-  function closeMenu() {
-    setMenuOpen(false);
-  }
+  function closeMenu() { setMenuOpen(false); }
 
   if (navToggle && nav && navLinks) {
     navToggle.addEventListener('click', () => {
-      const next = !nav.classList.contains('menu-open');
-      setMenuOpen(next);
+      setMenuOpen(!nav.classList.contains('menu-open'));
     });
-
     navLinks.querySelectorAll('a[href^="#"]').forEach((link) => {
-      link.addEventListener('click', () => {
-        closeMenu();
-      });
+      link.addEventListener('click', closeMenu);
     });
-
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeMenu();
     });
-
     window.addEventListener('resize', () => {
-      if (window.matchMedia('(min-width: 56.26em)').matches) {
-        closeMenu();
-      }
+      if (window.matchMedia('(min-width: 56.26em)').matches) closeMenu();
     });
   }
 })();
