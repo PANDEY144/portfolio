@@ -58,20 +58,5 @@ src/
 public/             Static assets, sitemap, robots, resume
 ```
 
-## Deploy To Vercel
-
-1. Push this repo to GitHub.
-2. Import the repo in Vercel.
-3. Use the default Vite settings:
-   - Build command: `npm run build`
-   - Output directory: `dist`
-4. Deploy.
-
-## Deploy To Netlify
-
-1. Push this repo to GitHub.
-2. Create a new Netlify site from Git.
-3. Use:
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-4. Deploy.
+## AUTHOR 
+GAURAV PANDEY
