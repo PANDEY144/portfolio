@@ -1,23 +1,23 @@
 import { motion } from 'framer-motion';
-import { Award, Layers, PenTool, Rocket } from 'lucide-react';
+import { Award, Code2, Layers, Rocket } from 'lucide-react';
 import { SectionHeader } from './SectionHeader';
 
 const highlights = [
-  { icon: PenTool, label: 'Design Philosophy', value: 'Simple flows, strong hierarchy, useful delight.' },
-  { icon: Layers, label: 'Systems Thinking', value: 'Reusable components, tokens, and clear states.' },
-  { icon: Rocket, label: 'Creative Approach', value: 'Prototype fast, validate early, polish with intent.' },
-  { icon: Award, label: 'Achievements', value: 'Built product concepts, landing pages, and UI systems.' },
+  { icon: Code2, label: 'Frontend Foundation', value: 'HTML, CSS, JavaScript, DOM work, and responsive layouts.' },
+  { icon: Layers, label: 'UI Thinking', value: 'Clean structure, strong hierarchy, and interfaces that feel easy to use.' },
+  { icon: Rocket, label: 'Project Practice', value: 'Learning by building, deploying, and improving real web projects.' },
+  { icon: Award, label: 'Next Step', value: 'Ready for internship work where I can contribute and grow fast.' },
 ];
 
-const tools = ['Figma', 'Adobe XD', 'Photoshop', 'React', 'Tailwind', 'HTML/CSS/JS', 'Motion Design'];
+const tools = ['HTML5', 'CSS3', 'JavaScript', 'React', 'Spline 3D', 'Git', 'GitHub', 'VS Code', 'APIs'];
 
 export function About() {
   return (
     <section className="section" id="about">
       <SectionHeader
         eyebrow="About"
-        title="A product-minded designer who can also bring the interface to life."
-        copy="My work sits at the intersection of visual design, UX clarity, and frontend execution."
+        title="A BCA student growing into frontend development through real projects."
+        copy="My work sits at the intersection of clean code, bold web design, and practical learning."
       />
 
       <div className="about-grid">
@@ -29,13 +29,12 @@ export function About() {
           transition={{ duration: 0.65 }}
         >
           <p>
-            I design interfaces that help people move through digital products with confidence. My process starts with
-            understanding the user, shaping the core journey, and then refining the visual language until every screen
-            feels intentional.
+            I am an aspiring frontend developer from Rudrapur, Uttarakhand, currently pursuing BCA. I like building web
+            pages and small apps that turn basic ideas into usable, responsive experiences.
           </p>
           <p>
-            As a creative frontend developer, I care about how a design behaves after it leaves the canvas: motion,
-            loading states, accessibility, responsiveness, and the tiny details that make an experience feel finished.
+            My current focus is strengthening JavaScript fundamentals, DOM manipulation, responsive design, React, APIs,
+            and modern tools like Spline 3D. I care about writing clean code and improving with every project I ship.
           </p>
           <div className="tool-cloud">
             {tools.map((tool) => (

@@ -13,9 +13,9 @@ export function Projects() {
   return (
     <section className="section projects-section" id="projects">
       <SectionHeader
-        eyebrow="Selected Work"
-        title="Case studies built to impress clients, recruiters, and product teams."
-        copy="Each project is structured like a real case study: the problem, process, role, design decisions, and measurable outcome."
+        eyebrow="Projects"
+        title="Things I have built while learning frontend development."
+        copy="Live projects with responsive layouts, JavaScript interactions, and practical UI decisions."
       />
 
       <div className="projects-grid">
@@ -57,9 +57,11 @@ export function Projects() {
                 <a href={project.liveUrl} target="_blank" rel="noreferrer" className="small-button">
                   <ExternalLink size={16} /> Live Demo
                 </a>
-                <a href={project.githubUrl} target="_blank" rel="noreferrer" className="small-button">
-                  <Github size={16} /> GitHub
-                </a>
+                {project.githubUrl ? (
+                  <a href={project.githubUrl} target="_blank" rel="noreferrer" className="small-button">
+                    <Github size={16} /> GitHub
+                  </a>
+                ) : null}
                 <button type="button" className="small-button" onClick={() => setSelectedProject(project)}>
                   <FileText size={16} /> Case Study
                 </button>

@@ -24,7 +24,7 @@ export function Hero() {
           </div>
           <h1>
             {profile.name}
-            <span>Designing digital products that look sharp and feel effortless.</span>
+            <span>Frontend developer building clean, interactive web experiences.</span>
           </h1>
           <p className="hero-title">{profile.title}</p>
           <p className="hero-tagline">{profile.tagline}</p>

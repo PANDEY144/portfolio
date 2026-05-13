@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Dribbble, Github, Instagram, Linkedin, Mail, MapPin, Palette, Send } from 'lucide-react';
+import { Github, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { FormEvent, useState } from 'react';
 import { profile } from '../data/portfolio';
 import { SectionHeader } from './SectionHeader';
@@ -35,7 +35,7 @@ export function Contact() {
     <section className="section contact-section" id="contact">
       <SectionHeader
         eyebrow="Contact"
-        title="Let’s build a portfolio, product, or brand experience that earns attention."
+        title="Open to frontend internship opportunities and project collaboration."
         copy={profile.availability}
       />
 
@@ -82,13 +82,10 @@ export function Contact() {
             {profile.availability}
           </div>
           <a href={`mailto:${profile.email}`}><Mail size={18} /> {profile.email}</a>
+          <a href={`tel:${profile.phone.replace(/\s/g, '')}`}><Phone size={18} /> {profile.phone}</a>
           <p><MapPin size={18} /> {profile.location}</p>
           <div className="social-grid">
-            <a href={profile.social.linkedin} aria-label="LinkedIn" target="_blank" rel="noreferrer"><Linkedin size={18} /></a>
             <a href={profile.social.github} aria-label="GitHub" target="_blank" rel="noreferrer"><Github size={18} /></a>
-            <a href={profile.social.behance} aria-label="Behance" target="_blank" rel="noreferrer"><Palette size={18} /></a>
-            <a href={profile.social.dribbble} aria-label="Dribbble" target="_blank" rel="noreferrer"><Dribbble size={18} /></a>
-            <a href={profile.social.instagram} aria-label="Instagram" target="_blank" rel="noreferrer"><Instagram size={18} /></a>
           </div>
         </motion.aside>
       </div>

@@ -1,29 +1,28 @@
 import { motion } from 'framer-motion';
-import { testimonials } from '../data/portfolio';
+import { strengths } from '../data/portfolio';
 import { SectionHeader } from './SectionHeader';
 
 export function Testimonials() {
   return (
-    <section className="section">
+    <section className="section" id="strengths">
       <SectionHeader
-        eyebrow="Testimonials"
-        title="Feedback that speaks to clarity, taste, and execution."
+        eyebrow="Strengths"
+        title="How I approach frontend work and continuous improvement."
       />
 
-      <div className="testimonial-track" aria-label="Client testimonials">
-        {[...testimonials, ...testimonials].map((testimonial, index) => (
+      <div className="testimonial-track" aria-label="Core strengths">
+        {strengths.map((strength, index) => (
           <motion.article
             className="testimonial-card"
-            key={`${testimonial.name}-${index}`}
+            key={strength.title}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: (index % testimonials.length) * 0.07 }}
+            transition={{ duration: 0.5, delay: index * 0.07 }}
           >
-            <p>“{testimonial.quote}”</p>
+            <p>{strength.detail}</p>
             <div>
-              <strong>{testimonial.name}</strong>
-              <span>{testimonial.role}</span>
+              <strong>{strength.title}</strong>
             </div>
           </motion.article>
         ))}

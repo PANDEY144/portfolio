@@ -1,6 +1,6 @@
 # GAURAV PANDEY Portfolio
 
-Modern React + Vite + TypeScript portfolio for a UI/UX Designer and Creative Developer. It includes a dark/light theme, sticky navigation, scroll progress, Framer Motion animations, project case-study modal, contact form validation, SEO tags, sitemap, and an easy content data file.
+Modern React + Vite + TypeScript portfolio for a BCA student and aspiring frontend developer. It includes a dark/light theme, sticky navigation, scroll progress, Framer Motion animations, project case-study modal, contact form validation, SEO tags, sitemap, and an easy content data file.
 
 ## Run Locally
 
@@ -30,8 +30,7 @@ Update this file to change:
 
 - Name, title, tagline, email, social links, availability, and resume URL
 - Project titles, descriptions, tags, tech stack, live demo links, GitHub links, and case-study details
-- Experience timeline
-- Skills and testimonials
+- Education, strengths, and skills
 
 Replace the placeholder resume here:
 

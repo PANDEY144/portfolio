@@ -90,9 +90,11 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 <a className="button primary" href={project.liveUrl} target="_blank" rel="noreferrer">
                   Live Demo <ExternalLink size={18} />
                 </a>
-                <a className="button secondary" href={project.githubUrl} target="_blank" rel="noreferrer">
-                  GitHub <Github size={18} />
-                </a>
+                {project.githubUrl ? (
+                  <a className="button secondary" href={project.githubUrl} target="_blank" rel="noreferrer">
+                    GitHub <Github size={18} />
+                  </a>
+                ) : null}
               </div>
             </div>
           </motion.article>

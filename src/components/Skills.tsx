@@ -7,7 +7,7 @@ export function Skills() {
     <section className="section" id="skills">
       <SectionHeader
         eyebrow="Skills"
-        title="A balanced toolkit for design craft, frontend build, and brand polish."
+        title="The frontend skills, concepts, and tools I am building with."
       />
 
       <div className="skills-grid">

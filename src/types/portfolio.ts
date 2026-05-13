@@ -14,8 +14,8 @@ export type Project = {
   tags: string[];
   tech: string[];
   liveUrl: string;
-  githubUrl: string;
-  caseStudyUrl: string;
+  githubUrl?: string;
+  caseStudyUrl?: string;
   testimonial?: string;
   palette: string[];
 };
@@ -23,4 +23,15 @@ export type Project = {
 export type SkillGroup = {
   title: string;
   items: { name: string; level: number }[];
+};
+
+export type Education = {
+  degree: string;
+  school: string;
+  period: string;
+};
+
+export type Strength = {
+  title: string;
+  detail: string;
 };
