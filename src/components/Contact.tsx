@@ -8,13 +8,14 @@ type Errors = {
   name?: string;
   email?: string;
   message?: string;
+  form?: string;
 };
 
 export function Contact() {
   const [errors, setErrors] = useState<Errors>({});
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const nextErrors: Errors = {};
@@ -27,8 +28,42 @@ export function Contact() {
     if (message.length < 12) nextErrors.message = 'Please share a little more detail.';
 
     setErrors(nextErrors);
-    setSent(Object.keys(nextErrors).length === 0);
-    if (Object.keys(nextErrors).length === 0) event.currentTarget.reset();
+    setStatus('idle');
+
+    if (Object.keys(nextErrors).length > 0) return;
+
+    setStatus('sending');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const contentType = response.headers.get('content-type') ?? '';
+      const data = contentType.includes('application/json')
+        ? ((await response.json().catch(() => ({}))) as { error?: string })
+        : {};
+
+      if (!response.ok) {
+        const apiMissing = response.status === 404 && !contentType.includes('application/json');
+        setErrors({
+          form: apiMissing
+            ? 'The contact API is not running here. Use the deployed site or run it with Vercel Dev.'
+            : data.error ?? 'Message could not be sent. Please try again.',
+        });
+        setStatus('idle');
+        return;
+      }
+
+      event.currentTarget.reset();
+      setErrors({});
+      setStatus('sent');
+    } catch {
+      setErrors({ form: 'Message could not be sent. Please check your connection and try again.' });
+      setStatus('idle');
+    }
   }
 
   return (
@@ -64,10 +99,11 @@ export function Contact() {
             <textarea name="message" rows={5} placeholder="Tell me what you want to design or build." aria-invalid={Boolean(errors.message)} />
             {errors.message ? <span className="field-error">{errors.message}</span> : null}
           </label>
-          <button className="button primary" type="submit">
-            Send Message <Send size={18} />
+          <button className="button primary" type="submit" disabled={status === 'sending'}>
+            {status === 'sending' ? 'Sending...' : 'Send Message'} <Send size={18} />
           </button>
-          {sent ? <p className="form-success">Message validated. Connect this form to Formspree, Netlify Forms, or your backend next.</p> : null}
+          {errors.form ? <p className="field-error">{errors.form}</p> : null}
+          {status === 'sent' ? <p className="form-success">Message sent. I will get back to you soon.</p> : null}
         </motion.form>
 
         <motion.aside

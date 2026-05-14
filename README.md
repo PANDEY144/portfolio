@@ -11,6 +11,18 @@ npm install
 npm run dev
 ```
 
+To enable the contact form email forwarding, create a local `.env` file from `.env.example` and set:
+
+```bash
+RESEND_API_KEY=your_resend_api_key
+CONTACT_TO_EMAIL=pamdeygaurav911@gmail.com
+RESEND_FROM_EMAIL="Portfolio Contact <onboarding@resend.dev>"
+```
+
+For production on Vercel, add the same environment variables in the project settings. Use a verified sender/domain in `RESEND_FROM_EMAIL` when the site is public.
+
+Use `vercel dev` when you want to test the `/api/contact` serverless function locally.
+
 Build for production:
 
 ```bash
