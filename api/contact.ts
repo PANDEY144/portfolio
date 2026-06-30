@@ -61,7 +61,9 @@ export default async function handler(request: ContactRequest, response: Contact
   const fromEmail = process.env.RESEND_FROM_EMAIL ?? 'Portfolio Contact <onboarding@resend.dev>';
 
   if (!resendApiKey) {
-    return response.status(500).json({ error: 'Email service is not configured.' });
+    return response.status(503).json({
+      error: 'The contact form is not configured yet. Please email me directly instead.',
+    });
   }
 
   const body = parseBody(request.body);
