@@ -9,11 +9,19 @@ type Errors = {
   email?: string;
   message?: string;
   form?: string;
+  mailto?: string;
 };
 
 export function Contact() {
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
+
+  function buildMailto(name: string, email: string, message: string) {
+    const subject = encodeURIComponent(`Portfolio message from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+
+    return `mailto:${profile.email}?subject=${subject}&body=${body}`;
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -48,10 +56,14 @@ export function Contact() {
 
       if (!response.ok) {
         const apiMissing = response.status === 404 && !contentType.includes('application/json');
+        const serviceNotConfigured = response.status === 503 && data.error?.toLowerCase().includes('not configured');
         setErrors({
           form: apiMissing
-            ? 'The contact API is not running here. Use the deployed site or run it with Vercel Dev.'
+            ? 'The contact API is not running here. You can still send this with your email app.'
+            : serviceNotConfigured
+              ? 'The contact form needs email setup. You can still send this with your email app.'
             : data.error ?? 'Message could not be sent. Please try again.',
+          mailto: apiMissing || serviceNotConfigured ? buildMailto(name, email, message) : undefined,
         });
         setStatus('idle');
         return;
@@ -103,6 +115,11 @@ export function Contact() {
             {status === 'sending' ? 'Sending...' : 'Send Message'} <Send size={18} />
           </button>
           {errors.form ? <p className="field-error">{errors.form}</p> : null}
+          {errors.mailto ? (
+            <a className="email-fallback" href={errors.mailto}>
+              Send with your email app
+            </a>
+          ) : null}
           {status === 'sent' ? <p className="form-success">Message sent. I will get back to you soon.</p> : null}
         </motion.form>
 
